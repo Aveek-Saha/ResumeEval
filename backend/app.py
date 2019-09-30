@@ -27,7 +27,7 @@ def index():
     return """
     <!doctype html>
     <title>Uploaded Files</title>
-    <h1>Upload new File</h1>
+    <h1>Uploaded Files</h1>
     
     <p>%s</p>
     """ % "<br>".join(os.listdir(app.config['UPLOAD_FOLDER'],))

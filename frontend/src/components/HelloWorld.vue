@@ -3,13 +3,15 @@
     <div class="upload">
       <ul v-if="files.length">
         <li v-for="(file) in files" :key="file.id">
+          <h4>
           Name: 
-          <span>{{file.name}}</span> | Size: 
-          <span>{{file.size | formatSize}}</span> |
-          <span v-if="file.error">{{file.error}}</span>
-          <span v-else-if="file.success">success</span>
-          <span v-else-if="file.active">active</span>
-          <span v-else></span>
+            <span>{{file.name}}</span> | Size: 
+            <span>{{file.size | formatSize}}</span> |
+            <span v-if="file.error">{{file.error}}</span>
+            <span v-else-if="file.success">success</span>
+            <span v-else-if="file.active">active</span>
+            <span v-else></span>
+          </h4>
         </li>
       </ul>
       <ul v-else>
@@ -22,7 +24,7 @@
       <div class="example-btn">
         <file-upload
           class="btn btn-primary"
-          post-action="/upload/post"
+          post-action="http://localhost:5001/"
           :multiple="true"
           :drop="true"
           :drop-directory="true"
@@ -52,7 +54,9 @@
 
 
 <style>
-
+ul{
+  list-style-type: none
+}
 .example-drag label.btn {
   margin-bottom: 0;
   margin-right: 1rem;
