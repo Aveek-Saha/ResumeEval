@@ -70,14 +70,44 @@ export default {
   data() {
     return {
       step:1,
+      school: {
+        name: null,
+        location: null,
+        degree: null,
+        major: null,
+        gpa: null,
+        start: null,
+        end: null
+      },
+      job: {
+          company_name: null,
+          title: null,
+          location: null,
+          start: null,
+          end: null,
+          responsibilities: []
+      },
+      project: {
+          name: null,
+          description: null,
+          link: null,
+          tools: []
+      },
+      award: {
+          name: null,
+          date: null,
+          summary: null
+      },
       registration:{
         name:null,
         email:null,
-        street:null,
-        city:null,
-        state:null,
-        numtickets:0,
-        shirtsize:'XL'
+        location: null,
+        link: null,
+        education: [],
+        work: [],
+        skills: [],
+        projects: [],
+        awards: []
       }
     }
   },

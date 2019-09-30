@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
      <span class="navbar-brand mb-0 h2">Resume Eval</span>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,8 +22,11 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div> -->
+    <div class="container-fluid">
+      <router-view/>
+    </div>
     
-    <router-view/>
+    
   </div>
 </template>
 
@@ -34,16 +38,7 @@
   text-align: center;
   color: #2c3e50;
 }
-/* #nav {
-  padding: 30px;
+.navbar {
+  margin-bottom: 2%;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-} */
 </style>
