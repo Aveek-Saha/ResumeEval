@@ -1,65 +1,174 @@
 <template>
 <form action="https://postman-echo.com/post" method="post">
   <div v-show="step === 1">
+    <h4 class="card-title">Personal Info</h4>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Full Name</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Phone number</label>
+        <input type="tel" class="form-control" id="exampleInputPassword1" placeholder="Enter Number">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Location</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Link</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter a URL">
+      </div>
+      <button class="btn btn-primary" @click.prevent="next()">Next</button>
 
-    <h1>Step One</h1>
-    
-    <legend for="name">Your Name:</legend>
+    <!-- <legend for="name">Your Name:</legend>
     <input id="name" name="name" v-model="registration.name">
 
     <legend for="email">Your Email:</legend>
-    <input id="email" name="email" type="email" v-model="registration.email">
-
-    <br>
-    <button @click.prevent="next()">Next</button>
+    <input id="email" name="email" type="email" v-model="registration.email"> -->
     
   </div>
 
   <div v-show="step === 2">
-    <h1>Step Two</h1>
-    
-    <legend for="street">Your Street:</legend>
-    <input id="street" name="street" v-model="registration.street">
-
-
-    <legend for="city">Your City:</legend>
-    <input id="city" name="city" v-model="registration.city">
-
-
-    <legend for="state">Your State:</legend>
-    <input id="state" name="state" v-model="registration.state">
-
-    <br>
-    <button @click.prevent="prev()">Previous</button>
-    <button @click.prevent="next()">Next</button>
-
+    <h4 class="card-title">Education</h4>
+      <div class="form-group">
+        <label for="exampleInputPassword1">School Name</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">School Location</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Degree</label>
+        <input type="tel" class="form-control" id="exampleInputPassword1" placeholder="Enter Number">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Major</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">GPA</label>
+        <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Enter a URL">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Start date</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">End date</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+      </div>
+      <div class="btn-group" role="group">
+        <button class="btn btn-primary" @click.prevent="prev()">Back</button>
+        <button class="btn btn-primary" @click.prevent="next()">Next</button>
+      </div>
   </div>
 
   <div v-show="step === 3">
-    <h1>Step Three</h1>
-    
-    <legend for="numtickets">Number of Tickets:</legend>
-    <input id="numtickets" name="numtickets" type="number" v-model="registration.numtickets">
+    <h4 class="card-title">Work</h4>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Company Name</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Location</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Title</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Number">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Responsibilities</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Start date</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">End date</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+      </div>
+      <div class="btn-group" role="group">
+        <button class="btn btn-primary" @click.prevent="prev()">Back</button>
+        <button class="btn btn-primary" @click.prevent="next()">Next</button>
+      </div>
+  </div>
 
-    <legend for="shirtsize">Shirt Size:</legend>
-    <select id="shirtsize" name="shirtsize" v-model="registration.shirtsize">
-      <option value="S">Small</option>
-      <option value="M">Medium</option>
-      <option value="L">Large</option>
-      <option value="XL">X-Large</option>
-    </select>
-    <br>
+  <div v-show="step === 4">
+    <h4 class="card-title">Skills</h4>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Skill Name</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Details</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      </div>
+      
+      <div class="btn-group" role="group">
+        <button class="btn btn-primary" @click.prevent="prev()">Back</button>
+        <button class="btn btn-primary" @click.prevent="next()">Next</button>
+      </div>
+  </div>
 
-    <button @click.prevent="prev()">Previous</button>
-    <input type="submit" value="Save">
-    
+  <div v-show="step === 5">
+    <h4 class="card-title">Projects</h4>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Project Name</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Description</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Link</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Number">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Tools used</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+      </div>
+      <div class="btn-group" role="group">
+        <button class="btn btn-primary" @click.prevent="prev()">Back</button>
+        <button class="btn btn-primary" @click.prevent="next()">Next</button>
+      </div>
+  </div>
+
+  <div v-show="step === 6">
+    <h4 class="card-title">Awards</h4>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Award Name</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Date</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Summary</label>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+      </div>
+      <div class="btn-group" role="group">
+        <button class="btn btn-primary" @click.prevent="prev()">Back</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
   </div>
   </form>
 </template>
 
 
 <style>
-
+.form-group{
+  text-align: left;
+}
 </style>
 
 <script>
