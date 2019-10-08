@@ -35,34 +35,43 @@
 
   <div v-show="step === 2">
     <h4 class="card-title">Education</h4>
-      <div class="form-group">
-        <label for="exampleInputPassword1">School Name</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">School Location</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Degree</label>
-        <input type="tel" class="form-control" id="exampleInputPassword1" placeholder="Enter Number">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Major</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">GPA</label>
-        <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Enter a URL">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Start date</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">End date</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
-      </div>
+        <div v-for="(school, index) in education" v-bind:key="index">
+          <div class="form-group">
+            <label >School Name</label>
+            <input type="text" class="form-control" v-model="school.name" placeholder="Enter your name">
+          </div>
+          <div class="form-group">
+            <label >School Location</label>
+            <input type="email" class="form-control" aria-describedby="emailHelp" v-model="school.location" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label>Degree</label>
+            <input type="tel" class="form-control" v-model="school.degree" placeholder="Enter Number">
+          </div>
+          <div class="form-group">
+            <label >Major</label>
+            <input type="text" class="form-control" v-model="school.major" placeholder="Location">
+          </div>
+          <div class="form-group">
+            <label >GPA</label>
+            <input type="number" class="form-control" v-model="school.gpa" placeholder="Enter a URL">
+          </div>
+          <div class="form-group">
+            <label >Start date</label>
+            <input type="text" class="form-control" v-model="school.start" placeholder="Location">
+          </div>
+          <div class="form-group">
+            <label >End date</label>
+            <input type="text" class="form-control" v-model="school.end" placeholder="Location">
+          </div>
+          <div class="btn-group" role="group" style="text-align: right">
+            <button class="btn btn-outline-danger" @click.prevent="delEducation(index)">Delete</button>
+            <button class="btn btn-outline-success" @click.prevent="addEducation()">Add</button>
+          </div>
+        <hr>
+        </div>
+        <br>
+
       <div class="btn-group" role="group">
         <button class="btn btn-primary" @click.prevent="prev()">Back</button>
         <button class="btn btn-primary" @click.prevent="next()">Next</button>
@@ -172,6 +181,7 @@
 </style>
 
 <script>
+
 export default {
   name: 'Form',
   components: {
@@ -179,7 +189,11 @@ export default {
   data() {
     return {
       step:1,
-      school: {
+      name:null,
+      email:null,
+      location: null,
+      link: null,
+      education: [{
         name: null,
         location: null,
         degree: null,
@@ -187,37 +201,27 @@ export default {
         gpa: null,
         start: null,
         end: null
-      },
-      job: {
+      }],
+      work: [{
           company_name: null,
           title: null,
           location: null,
           start: null,
           end: null,
           responsibilities: []
-      },
-      project: {
+      }],
+      skills: [],
+      projects: [{
           name: null,
           description: null,
           link: null,
           tools: []
-      },
-      award: {
+      }],
+      awards: [{
           name: null,
           date: null,
           summary: null
-      },
-      registration:{
-        name:null,
-        email:null,
-        location: null,
-        link: null,
-        education: [],
-        work: [],
-        skills: [],
-        projects: [],
-        awards: []
-      }
+      }]
     }
   },
   methods: {
@@ -226,6 +230,26 @@ export default {
     },
     next() {
         this.step++;
+    },
+    addEducation(){
+      this.education.push({
+        name: null,
+        location: null,
+        degree: null,
+        major: null,
+        gpa: null,
+        start: null,
+        end: null
+      })
+    },
+    delEducation(index){
+      if(this.education.length == 1)
+        return;
+      this.education.splice(index, 1)
+      
+    },
+    mounted () {
+      // this.addEducation()
     }
   }
 }

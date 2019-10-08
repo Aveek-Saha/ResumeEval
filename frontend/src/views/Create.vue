@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col">
       </div>
-      <div class="col-6">
+      <div class="col-lg-6 col-md-8 col-sm-10">
         <div class="card">
           <div class="card-body">
             <Form/>
