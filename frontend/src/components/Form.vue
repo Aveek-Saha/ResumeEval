@@ -174,21 +174,28 @@
 
   <div v-show="step === 6">
     <h4 class="card-title">Awards</h4>
+    <div v-for="(award, index) in awards" v-bind:key="index">
       <div class="form-group">
-        <label >Award Name</label>
-        <input type="text" class="form-control"   placeholder="Enter your name">
+        <label >Name</label>
+        <input type="text" class="form-control" v-model="award.name" placeholder="Name of the award">
       </div>
       <div class="form-group">
         <label >Date</label>
-        <input type="text" class="form-control"   placeholder="Location">
+        <input type="text" class="form-control" v-model="award.date" placeholder="Date of recieving">
       </div>
       <div class="form-group">
         <label >Summary</label>
-        <input type="text" class="form-control"   placeholder="Location">
+        <textarea class="form-control" v-model="award.summary" rows="3" placeholder="About the award"></textarea>
       </div>
+      <div class="btn-group" role="group" style="text-align: right">
+          <button class="btn btn-outline-success" @click.prevent="addAward()">Add</button>
+          <button class="btn btn-outline-danger" @click.prevent="delAward(index)">Del</button>
+        </div>
+      <hr>
+    </div>
       <div class="btn-group" role="group">
         <button class="btn btn-primary" @click.prevent="prev()">Back</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button class="btn btn-primary" @click.prevent="sendData()">Submit</button>
       </div>
   </div>
   </form>
@@ -315,6 +322,45 @@ export default {
       this.projects.splice(index, 1)
       
     },
+    addAward(){
+      this.awards.push({
+          name: null,
+          date: null,
+          summary: null
+      })
+    },
+    delAward(index){
+      if(this.awards.length == 1)
+        return;
+      this.awards.splice(index, 1)
+      
+    },
+    sendData(){
+      var name = this.name
+      var email = this.email
+      var number = this.number
+      var location = this.location
+      var link = this.link
+      var education = this.education
+      var work = this.work
+      var skills = this.skills
+      var projects = this.projects
+      var awards = this.awards
+
+      var data = {
+        name,
+        email,
+        number,
+        location,
+        link,
+        education,
+        work,
+        skills,
+        projects,
+        awards
+      }
+      console.log(data)
+    }
   }
 }
 </script>
