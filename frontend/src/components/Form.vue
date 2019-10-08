@@ -3,8 +3,8 @@
   <div v-show="step === 1">
     <h4 class="card-title">Personal Info</h4>
       <div class="form-group">
-        <label for="exampleInputPassword1">Full Name</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
+        <label >Full Name</label>
+        <input type="text" class="form-control"   placeholder="Enter your name">
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
@@ -12,16 +12,16 @@
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Phone number</label>
-        <input type="tel" class="form-control" id="exampleInputPassword1" placeholder="Enter Number">
+        <label >Phone number</label>
+        <input type="tel" class="form-control"   placeholder="Enter Number">
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Location</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+        <label >Location</label>
+        <input type="text" class="form-control"   placeholder="Location">
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Link</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter a URL">
+        <label >Link</label>
+        <input type="text" class="form-control"   placeholder="Enter a URL">
       </div>
       <button class="btn btn-primary" @click.prevent="next()">Next</button>
 
@@ -65,8 +65,8 @@
             <input type="text" class="form-control" v-model="school.end" placeholder="Location">
           </div>
           <div class="btn-group" role="group" style="text-align: right">
-            <button class="btn btn-outline-danger" @click.prevent="delEducation(index)">Delete</button>
             <button class="btn btn-outline-success" @click.prevent="addEducation()">Add</button>
+            <button class="btn btn-outline-danger" @click.prevent="delEducation(index)">Del</button>
           </div>
         <hr>
         </div>
@@ -80,29 +80,36 @@
 
   <div v-show="step === 3">
     <h4 class="card-title">Work</h4>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Company Name</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Location</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Title</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Number">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Responsibilities</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Start date</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">End date</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+      <div v-for="(job, index) in work" v-bind:key="index">
+        <div class="form-group">
+          <label >Company Name</label>
+          <input type="text" class="form-control" v-model="job.name" placeholder="Company name">
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <input type="text" class="form-control" v-model="job.location" placeholder="Office location">
+        </div>
+        <div class="form-group">
+          <label >Title</label>
+          <input type="text" class="form-control" v-model="job.title" placeholder="Job title">
+        </div>
+        <div class="form-group">
+          <label >Responsibilities</label>
+          <textarea class="form-control" v-model="job.responsibilities" placeholder="Enter each responsibility on a new line" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label >Start date</label>
+          <input type="text" class="form-control" v-model="job.start" placeholder="Date started">
+        </div>
+        <div class="form-group">
+          <label >End date</label>
+          <input type="text" class="form-control" v-model="job.end" placeholder="Date ended">
+        </div>
+        <div class="btn-group" role="group" style="text-align: right">
+            <button class="btn btn-outline-success" @click.prevent="addWork()">Add</button>
+            <button class="btn btn-outline-danger" @click.prevent="delWork(index)">Del</button>
+          </div>
+        <hr>
       </div>
       <div class="btn-group" role="group">
         <button class="btn btn-primary" @click.prevent="prev()">Back</button>
@@ -113,8 +120,8 @@
   <div v-show="step === 4">
     <h4 class="card-title">Skills</h4>
       <div class="form-group">
-        <label for="exampleInputPassword1">Skill Name</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
+        <label >Skill Name</label>
+        <input type="text" class="form-control"   placeholder="Enter your name">
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Details</label>
@@ -130,20 +137,20 @@
   <div v-show="step === 5">
     <h4 class="card-title">Projects</h4>
       <div class="form-group">
-        <label for="exampleInputPassword1">Project Name</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
+        <label >Project Name</label>
+        <input type="text" class="form-control"   placeholder="Enter your name">
       </div>
       <div class="form-group">
         <label for="exampleInputEmail1">Description</label>
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Link</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter Number">
+        <label >Link</label>
+        <input type="text" class="form-control"   placeholder="Enter Number">
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Tools used</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+        <label >Tools used</label>
+        <input type="text" class="form-control"   placeholder="Location">
       </div>
       <div class="btn-group" role="group">
         <button class="btn btn-primary" @click.prevent="prev()">Back</button>
@@ -154,16 +161,16 @@
   <div v-show="step === 6">
     <h4 class="card-title">Awards</h4>
       <div class="form-group">
-        <label for="exampleInputPassword1">Award Name</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter your name">
+        <label >Award Name</label>
+        <input type="text" class="form-control"   placeholder="Enter your name">
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Date</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+        <label >Date</label>
+        <input type="text" class="form-control"   placeholder="Location">
       </div>
       <div class="form-group">
-        <label for="exampleInputPassword1">Summary</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Location">
+        <label >Summary</label>
+        <input type="text" class="form-control"   placeholder="Location">
       </div>
       <div class="btn-group" role="group">
         <button class="btn btn-primary" @click.prevent="prev()">Back</button>
@@ -203,7 +210,7 @@ export default {
         end: null
       }],
       work: [{
-          company_name: null,
+          name: null,
           title: null,
           location: null,
           start: null,
@@ -248,9 +255,22 @@ export default {
       this.education.splice(index, 1)
       
     },
-    mounted () {
-      // this.addEducation()
-    }
+    addWork(){
+      this.work.push({
+        name: null,
+        title: null,
+        location: null,
+        start: null,
+        end: null,
+        responsibilities: []
+      })
+    },
+    delWork(index){
+      if(this.work.length == 1)
+        return;
+      this.work.splice(index, 1)
+      
+    },
   }
 }
 </script>
