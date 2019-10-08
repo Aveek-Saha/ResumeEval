@@ -143,22 +143,29 @@
 
   <div v-show="step === 5">
     <h4 class="card-title">Projects</h4>
+    <div v-for="(project, index) in projects" v-bind:key="index">
       <div class="form-group">
-        <label >Project Name</label>
-        <input type="text" class="form-control"   placeholder="Enter your name">
+        <label >Title</label>
+        <input type="text" class="form-control" v-model="project.name" placeholder="Project title">
       </div>
       <div class="form-group">
-        <label for="exampleInputEmail1">Description</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <label>Description</label>
+        <input type="text" class="form-control" v-model="project.description" placeholder="Enter email">
       </div>
       <div class="form-group">
         <label >Link</label>
-        <input type="text" class="form-control"   placeholder="Enter Number">
+        <input type="text" class="form-control" v-model="project.link" placeholder="Link to the project">
       </div>
       <div class="form-group">
         <label >Tools used</label>
-        <input type="text" class="form-control"   placeholder="Location">
+        <input type="text" class="form-control" v-model="project.tools" placeholder="Seperate each tool with a comma">
       </div>
+      <div class="btn-group" role="group" style="text-align: right">
+          <button class="btn btn-outline-success" @click.prevent="addProject()">Add</button>
+          <button class="btn btn-outline-danger" @click.prevent="delProject(index)">Del</button>
+        </div>
+      <hr>
+    </div>
       <div class="btn-group" role="group">
         <button class="btn btn-primary" @click.prevent="prev()">Back</button>
         <button class="btn btn-primary" @click.prevent="next()">Next</button>
@@ -292,6 +299,20 @@ export default {
       if(this.skills.length == 1)
         return;
       this.skills.splice(index, 1)
+      
+    },
+    addProject(){
+      this.projects.push({
+          name: null,
+          description: null,
+          link: null,
+          tools: null
+      })
+    },
+    delProject(index){
+      if(this.projects.length == 1)
+        return;
+      this.projects.splice(index, 1)
       
     },
   }
