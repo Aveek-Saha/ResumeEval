@@ -209,7 +209,7 @@
 </style>
 
 <script>
-
+import axios from "axios";
 export default {
   name: 'Form',
   components: {
@@ -217,6 +217,7 @@ export default {
   data() {
     return {
       step:1,
+      url: "http://localhost:9000/create",
       name:null,
       email:null,
       number: null,
@@ -360,6 +361,13 @@ export default {
         awards
       }
       console.log(data)
+      axios.post(this.url, data)
+      .then(function (response) {
+        console.log(response)
+      })
+      .catch(function (error) {
+          console.log(error);
+      });
     }
   }
 }
