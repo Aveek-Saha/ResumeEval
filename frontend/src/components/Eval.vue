@@ -90,7 +90,7 @@ ul{
 <script>
 import FileUpload from 'vue-upload-component'
 export default {
-  name: 'Eval',
+  name: 'HelloWorld',
   components: {
     FileUpload,
   },
