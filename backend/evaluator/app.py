@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, redirect, url_for
+from flask import Flask, request, redirect, url_for, jsonify
 from werkzeug import secure_filename
 from flask_cors import CORS
 
@@ -31,6 +31,17 @@ def index():
     
     <p>%s</p>
     """ % "<br>".join(os.listdir(app.config['UPLOAD_FOLDER'],))
+
+
+@app.route("/rate", methods=['POST'])
+def rate():
+    rating = 0
+    summary = "This is a resume summary"
+    category = "IT"
+    if request.method == 'POST':
+        print(request)
+        rating = 1
+    return jsonify({'rating': rating, 'summary': summary, 'category': category})
 
 if __name__ == "__main__":
     app.run(host='localhost', port=5001, debug=True)

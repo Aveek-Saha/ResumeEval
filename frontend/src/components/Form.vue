@@ -342,6 +342,13 @@ export default {
       var number = this.number
       var location = this.location
       var link = this.link
+      var basics = {
+        name,
+        email,
+        number,
+        location,
+        link
+      }
       var education = this.education
       var work = this.work
       var skills = this.skills
@@ -349,11 +356,7 @@ export default {
       var awards = this.awards
 
       var data = {
-        name,
-        email,
-        number,
-        location,
-        link,
+        basics,
         education,
         work,
         skills,
