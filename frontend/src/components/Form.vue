@@ -1,377 +1,484 @@
 <template>
-<form action="https://postman-echo.com/post" method="post">
-  <div v-show="step === 1">
-    <h4 class="card-title">Personal Info</h4>
+  <form method="post">
+    <div v-show="step === 1">
+      <h4 class="card-title">Personal Info</h4>
       <div class="form-group">
-        <label >Full Name</label>
-        <input type="text" class="form-control" v-model="name"  placeholder="Enter your name">
+        <label>Full Name</label>
+        <input type="text" class="form-control" v-model="name" placeholder="Enter your name" />
       </div>
       <div class="form-group">
         <label>Email address</label>
-        <input type="email" class="form-control" v-model="email" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <input type="email" class="form-control" v-model="email" placeholder="Enter email" />
+        <small
+          id="emailHelp"
+          class="form-text text-muted"
+        >We'll never share your email with anyone else.</small>
       </div>
       <div class="form-group">
-        <label >Phone number</label>
-        <input type="tel" class="form-control" v-model="number" placeholder="Enter Number">
+        <label>Phone number</label>
+        <input type="tel" class="form-control" v-model="number" placeholder="Enter Number" />
       </div>
       <div class="form-group">
-        <label >Location</label>
-        <input type="text" class="form-control" v-model="location" placeholder="Location">
+        <label>Location</label>
+        <input type="text" class="form-control" v-model="location" placeholder="Location" />
       </div>
       <div class="form-group">
-        <label >Link</label>
-        <input type="text" class="form-control" v-model="link" placeholder="Website link">
+        <label>Link</label>
+        <input type="text" class="form-control" v-model="link" placeholder="Website link" />
       </div>
-      <button class="btn btn-primary" @click.prevent="next()">Next</button>
+      <div class="btn-group" role="group">
+        <button class="btn btn-primary" @click.prevent="next()">Next</button>
+        <button class="btn btn-primary" @click.prevent="sendData()">Preview</button>
+      </div>
 
-    <!-- <legend for="name">Your Name:</legend>
+      <!-- <legend for="name">Your Name:</legend>
     <input id="name" name="name" v-model="registration.name">
 
     <legend for="email">Your Email:</legend>
-    <input id="email" name="email" type="email" v-model="registration.email"> -->
-    
-  </div>
+      <input id="email" name="email" type="email" v-model="registration.email">-->
+    </div>
 
-  <div v-show="step === 2">
-    <h4 class="card-title">Education</h4>
-        <div v-for="(school, index) in education" v-bind:key="index">
-          <div class="form-group">
-            <label >School Name</label>
-            <input type="text" class="form-control" v-model="school.name" placeholder="School/University name">
-          </div>
-          <div class="form-group">
-            <label >Location</label>
-            <input type="text" class="form-control" v-model="school.location" placeholder="School location">
-          </div>
-          <div class="form-group">
-            <label>Degree</label>
-            <input type="tel" class="form-control" v-model="school.degree" placeholder="Degree awarded">
-          </div>
-          <div class="form-group">
-            <label >Major</label>
-            <input type="text" class="form-control" v-model="school.major" placeholder="Major">
-          </div>
-          <div class="form-group">
-            <label >GPA</label>
-            <input type="number" class="form-control" v-model="school.gpa" placeholder="Grade point average">
-          </div>
-          <div class="form-group">
-            <label >Start date</label>
-            <input type="text" class="form-control" v-model="school.start" placeholder="Date started">
-          </div>
-          <div class="form-group">
-            <label >End date</label>
-            <input type="text" class="form-control" v-model="school.end" placeholder="Date ended">
-          </div>
-          <div class="btn-group" role="group" style="text-align: right">
-            <button class="btn btn-outline-success" @click.prevent="addEducation()">Add</button>
-            <button class="btn btn-outline-danger" @click.prevent="delEducation(index)">Del</button>
-          </div>
-        <hr>
-        </div>
-        <br>
-
-      <div class="btn-group" role="group">
-        <button class="btn btn-primary" @click.prevent="prev()">Back</button>
-        <button class="btn btn-primary" @click.prevent="next()">Next</button>
-      </div>
-  </div>
-
-  <div v-show="step === 3">
-    <h4 class="card-title">Work</h4>
-      <div v-for="(job, index) in work" v-bind:key="index">
+    <div v-show="step === 2">
+      <h4 class="card-title">Education</h4>
+      <div v-for="(school, index) in education" v-bind:key="index">
         <div class="form-group">
-          <label >Company Name</label>
-          <input type="text" class="form-control" v-model="job.name" placeholder="Company name">
+          <label>School Name</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="school.institution"
+            placeholder="School/University name"
+          />
         </div>
         <div class="form-group">
           <label>Location</label>
-          <input type="text" class="form-control" v-model="job.location" placeholder="Office location">
+          <input
+            type="text"
+            class="form-control"
+            v-model="school.location"
+            placeholder="School location"
+          />
         </div>
         <div class="form-group">
-          <label >Title</label>
-          <input type="text" class="form-control" v-model="job.title" placeholder="Job title">
+          <label>Degree</label>
+          <input
+            type="tel"
+            class="form-control"
+            v-model="school.studyType"
+            placeholder="Degree awarded"
+          />
         </div>
         <div class="form-group">
-          <label >Responsibilities</label>
-          <textarea class="form-control" v-model="job.responsibilities" placeholder="Enter each responsibility on a new line" rows="3"></textarea>
+          <label>Major</label>
+          <input type="text" class="form-control" v-model="school.area" placeholder="Major" />
         </div>
         <div class="form-group">
-          <label >Start date</label>
-          <input type="text" class="form-control" v-model="job.start" placeholder="Date started">
+          <label>GPA</label>
+          <input
+            type="number"
+            class="form-control"
+            v-model="school.gpa"
+            placeholder="Grade point average"
+          />
         </div>
         <div class="form-group">
-          <label >End date</label>
-          <input type="text" class="form-control" v-model="job.end" placeholder="Date ended">
+          <label>Start date</label>
+          <input type="text" class="form-control" v-model="school.startDate" placeholder="Date started" />
+        </div>
+        <div class="form-group">
+          <label>End date</label>
+          <input type="text" class="form-control" v-model="school.endDate" placeholder="Date ended" />
         </div>
         <div class="btn-group" role="group" style="text-align: right">
-            <button class="btn btn-outline-success" @click.prevent="addWork()">Add</button>
-            <button class="btn btn-outline-danger" @click.prevent="delWork(index)">Del</button>
-          </div>
-        <hr>
+          <button class="btn btn-outline-success" @click.prevent="addEducation()">Add</button>
+          <button class="btn btn-outline-danger" @click.prevent="delEducation(index)">Del</button>
+        </div>
+        <hr />
+      </div>
+      <br />
+
+      <div class="btn-group" role="group">
+        <button class="btn btn-primary" @click.prevent="prev()">Back</button>
+        <button class="btn btn-primary" @click.prevent="next()">Next</button>
+        <button class="btn btn-primary" @click.prevent="sendData()">Preview</button>
+      </div>
+    </div>
+
+    <div v-show="step === 3">
+      <h4 class="card-title">Work</h4>
+      <div v-for="(job, index) in work" v-bind:key="index">
+        <div class="form-group">
+          <label>Company Name</label>
+          <input type="text" class="form-control" v-model="job.company" placeholder="Company name" />
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="job.location"
+            placeholder="Office location"
+          />
+        </div>
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" v-model="job.position" placeholder="Job title" />
+        </div>
+        <div class="form-group">
+          <label>Responsibilities</label>
+          <textarea
+            class="form-control"
+            v-model="job.highlights"
+            placeholder="Enter each responsibility on a new line"
+            rows="3"
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <label>Start date</label>
+          <input type="text" class="form-control" v-model="job.startDate" placeholder="Date started" />
+        </div>
+        <div class="form-group">
+          <label>End date</label>
+          <input type="text" class="form-control" v-model="job.endDate" placeholder="Date ended" />
+        </div>
+        <div class="btn-group" role="group" style="text-align: right">
+          <button class="btn btn-outline-success" @click.prevent="addWork()">Add</button>
+          <button class="btn btn-outline-danger" @click.prevent="delWork(index)">Del</button>
+        </div>
+        <hr />
       </div>
       <div class="btn-group" role="group">
         <button class="btn btn-primary" @click.prevent="prev()">Back</button>
         <button class="btn btn-primary" @click.prevent="next()">Next</button>
+        <button class="btn btn-primary" @click.prevent="sendData()">Preview</button>
       </div>
-  </div>
+    </div>
 
-  <div v-show="step === 4">
-    <h4 class="card-title">Skills</h4>
+    <div v-show="step === 4">
+      <h4 class="card-title">Skills</h4>
       <div v-for="(skill, index) in skills" v-bind:key="index">
         <div class="form-group">
-          <label >Name</label>
-          <input type="text" class="form-control" v-model="skill.name" placeholder="Skill name">
+          <label>Name</label>
+          <input type="text" class="form-control" v-model="skill.name" placeholder="Skill name" />
         </div>
         <div class="form-group">
           <label for="exampleInputEmail1">Description</label>
-          <textarea class="form-control" rows="3" v-model="skill.description" placeholder="Enter each point on a new line"></textarea>
+          <textarea
+            class="form-control"
+            rows="3"
+            v-model="skill.keywords"
+            placeholder="Enter each point on a new line"
+          ></textarea>
         </div>
         <div class="btn-group" role="group" style="text-align: right">
-            <button class="btn btn-outline-success" @click.prevent="addSkill()">Add</button>
-            <button class="btn btn-outline-danger" @click.prevent="delSkill(index)">Del</button>
-          </div>
-        <hr>
+          <button class="btn btn-outline-success" @click.prevent="addSkill()">Add</button>
+          <button class="btn btn-outline-danger" @click.prevent="delSkill(index)">Del</button>
+        </div>
+        <hr />
       </div>
-      
+
       <div class="btn-group" role="group">
         <button class="btn btn-primary" @click.prevent="prev()">Back</button>
         <button class="btn btn-primary" @click.prevent="next()">Next</button>
+        <button class="btn btn-primary" @click.prevent="sendData()">Preview</button>
       </div>
-  </div>
+    </div>
 
-  <div v-show="step === 5">
-    <h4 class="card-title">Projects</h4>
-    <div v-for="(project, index) in projects" v-bind:key="index">
-      <div class="form-group">
-        <label >Title</label>
-        <input type="text" class="form-control" v-model="project.name" placeholder="Project title">
-      </div>
-      <div class="form-group">
-        <label>Description</label>
-        <input type="text" class="form-control" v-model="project.description" placeholder="Enter email">
-      </div>
-      <div class="form-group">
-        <label >Link</label>
-        <input type="text" class="form-control" v-model="project.link" placeholder="Link to the project">
-      </div>
-      <div class="form-group">
-        <label >Tools used</label>
-        <input type="text" class="form-control" v-model="project.tools" placeholder="Seperate each tool with a comma">
-      </div>
-      <div class="btn-group" role="group" style="text-align: right">
+    <div v-show="step === 5">
+      <h4 class="card-title">Projects</h4>
+      <div v-for="(project, index) in projects" v-bind:key="index">
+        <div class="form-group">
+          <label>Title</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="project.name"
+            placeholder="Project title"
+          />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="project.description"
+            placeholder="Enter email"
+          />
+        </div>
+        <div class="form-group">
+          <label>Link</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="project.url"
+            placeholder="Link to the project"
+          />
+        </div>
+        <div class="form-group">
+          <label>Tools used</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="project.keywords"
+            placeholder="Seperate each tool with a comma"
+          />
+        </div>
+        <div class="btn-group" role="group" style="text-align: right">
           <button class="btn btn-outline-success" @click.prevent="addProject()">Add</button>
           <button class="btn btn-outline-danger" @click.prevent="delProject(index)">Del</button>
         </div>
-      <hr>
-    </div>
+        <hr />
+      </div>
       <div class="btn-group" role="group">
         <button class="btn btn-primary" @click.prevent="prev()">Back</button>
         <button class="btn btn-primary" @click.prevent="next()">Next</button>
+        <button class="btn btn-primary" @click.prevent="sendData()">Preview</button>
       </div>
-  </div>
+    </div>
 
-  <div v-show="step === 6">
-    <h4 class="card-title">Awards</h4>
-    <div v-for="(award, index) in awards" v-bind:key="index">
-      <div class="form-group">
-        <label >Name</label>
-        <input type="text" class="form-control" v-model="award.name" placeholder="Name of the award">
-      </div>
-      <div class="form-group">
-        <label >Date</label>
-        <input type="text" class="form-control" v-model="award.date" placeholder="Date of recieving">
-      </div>
-      <div class="form-group">
-        <label >Summary</label>
-        <textarea class="form-control" v-model="award.summary" rows="3" placeholder="About the award"></textarea>
-      </div>
-      <div class="btn-group" role="group" style="text-align: right">
+    <div v-show="step === 6">
+      <h4 class="card-title">Awards</h4>
+      <div v-for="(award, index) in awards" v-bind:key="index">
+        <div class="form-group">
+          <label>Name</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="award.title"
+            placeholder="Name of the award"
+          />
+        </div>
+        <div class="form-group">
+          <label>Date</label>
+          <input
+            type="text"
+            class="form-control"
+            v-model="award.date"
+            placeholder="Date of recieving"
+          />
+        </div>
+        <div class="form-group">
+          <label>Summary</label>
+          <textarea
+            class="form-control"
+            v-model="award.summary"
+            rows="3"
+            placeholder="About the award"
+          ></textarea>
+        </div>
+        <div class="btn-group" role="group" style="text-align: right">
           <button class="btn btn-outline-success" @click.prevent="addAward()">Add</button>
           <button class="btn btn-outline-danger" @click.prevent="delAward(index)">Del</button>
         </div>
-      <hr>
-    </div>
+        <hr />
+      </div>
       <div class="btn-group" role="group">
         <button class="btn btn-primary" @click.prevent="prev()">Back</button>
         <button class="btn btn-primary" @click.prevent="sendData()">Submit</button>
+        <button class="btn btn-primary" @click.prevent="sendData()">Preview</button>
       </div>
-  </div>
+    </div>
   </form>
 </template>
 
 
 <style>
-.form-group{
+.form-group {
   text-align: left;
 }
 </style>
 
 <script>
-import axios from "axios";
+import { async } from "q";
+
 export default {
-  name: 'Form',
-  components: {
-  },
+  name: "Form",
+  components: {},
   data() {
     return {
-      step:1,
-      url: "http://localhost:9000/create",
-      name:null,
-      email:null,
+      step: 1,
+      url: "http://localhost:9000/api/generate/resume",
+      name: null,
+      email: null,
       number: null,
       location: null,
       link: null,
-      education: [{
-        name: null,
-        location: null,
-        degree: null,
-        major: null,
-        gpa: null,
-        start: null,
-        end: null
-      }],
-      work: [{
-          name: null,
-          title: null,
+      education: [
+        {
+          institution: null,
           location: null,
-          start: null,
-          end: null,
-          responsibilities: null
-      }],
-      skills: [{
-        name: null,
-        description: null
-      }],
-      projects: [{
+          studyType: null,
+          area: null,
+          gpa: null,
+          startDate: null,
+          endDate: null
+        }
+      ],
+      work: [
+        {
+          company: null,
+          position: null,
+          location: null,
+          startDate: null,
+          endDate: null,
+          highlights: null
+        }
+      ],
+      skills: [
+        {
+          name: null,
+          keywords: null
+        }
+      ],
+      projects: [
+        {
           name: null,
           description: null,
-          link: null,
-          tools: null
-      }],
-      awards: [{
-          name: null,
+          url: null,
+          keywords: null
+        }
+      ],
+      awards: [
+        {
+          title: null,
           date: null,
           summary: null
-      }]
-    }
+        }
+      ]
+    };
   },
   methods: {
     prev() {
-        this.step--;
+      this.step--;
     },
     next() {
-        this.step++;
+      this.step++;
     },
-    addEducation(){
+    addEducation() {
       this.education.push({
-        name: null,
+        institution: null,
         location: null,
-        degree: null,
-        major: null,
+        studyType: null,
+        area: null,
         gpa: null,
-        start: null,
-        end: null
-      })
+        startDate: null,
+        endDate: null
+      });
     },
-    delEducation(index){
-      if(this.education.length == 1)
-        return;
-      this.education.splice(index, 1)
-      
+    delEducation(index) {
+      if (this.education.length == 1) return;
+      this.education.splice(index, 1);
     },
-    addWork(){
+    addWork() {
       this.work.push({
-        name: null,
-        title: null,
+        company: null,
+        position: null,
         location: null,
-        start: null,
-        end: null,
-        responsibilities: null
-      })
+        startDate: null,
+        endDate: null,
+        highlights: null
+      });
     },
-    delWork(index){
-      if(this.work.length == 1)
-        return;
-      this.work.splice(index, 1)
-      
+    delWork(index) {
+      if (this.work.length == 1) return;
+      this.work.splice(index, 1);
     },
-    addSkill(){
+    addSkill() {
       this.skills.push({
         name: null,
-        description: null
-      })
+        keywords: null
+      });
     },
-    delSkill(index){
-      if(this.skills.length == 1)
-        return;
-      this.skills.splice(index, 1)
-      
+    delSkill(index) {
+      if (this.skills.length == 1) return;
+      this.skills.splice(index, 1);
     },
-    addProject(){
+    addProject() {
       this.projects.push({
-          name: null,
-          description: null,
-          link: null,
-          tools: null
-      })
+        name: null,
+        description: null,
+        url: null,
+        keywords: null
+      });
     },
-    delProject(index){
-      if(this.projects.length == 1)
-        return;
-      this.projects.splice(index, 1)
-      
+    delProject(index) {
+      if (this.projects.length == 1) return;
+      this.projects.splice(index, 1);
     },
-    addAward(){
+    addAward() {
       this.awards.push({
-          name: null,
-          date: null,
-          summary: null
-      })
+        title: null,
+        date: null,
+        summary: null
+      });
     },
-    delAward(index){
-      if(this.awards.length == 1)
-        return;
-      this.awards.splice(index, 1)
-      
+    delAward(index) {
+      if (this.awards.length == 1) return;
+      this.awards.splice(index, 1);
     },
-    sendData(){
-      var name = this.name
-      var email = this.email
-      var number = this.number
-      var location = this.location
-      var link = this.link
+    sendData() {
+      var self = this;
+      var selectedTemplate = 1;
+      var sections = [
+        "profile",
+        "education",
+        "work",
+        "skills",
+        "projects",
+        "awards"
+      ];
+      var name = this.name;
+      var email = this.email;
+      var phone = this.number;
+      var location = this.location;
+      var website = this.link;
       var basics = {
         name,
         email,
-        number,
+        phone,
         location,
-        link
-      }
-      var education = this.education
-      var work = this.work
-      var skills = this.skills
-      var projects = this.projects
-      var awards = this.awards
+        website
+      };
+      var education = this.education;
+      var work = this.work;
+      var skills = this.skills;
+      var projects = this.projects;
+      var awards = this.awards;
 
       var data = {
+        selectedTemplate,
+        sections,
         basics,
         education,
         work,
         skills,
         projects,
         awards
-      }
-      console.log(data)
-      axios.post(this.url, data)
-      .then(function (response) {
-        console.log(response)
-      })
-      .catch(function (error) {
-          console.log(error);
-      });
+      };
+      console.log(data);
+
+      (async () => {
+        const { fetch } = window;
+        const req = {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+          credentials: "same-origin"
+        };
+
+        const res = await fetch(self.url, req);
+        const blob = await res.blob();
+
+        if (!res.ok) {
+          console.log("[ERROR] Response Received")
+        } else {
+          console.log("[SUCCESS] Response Received", blob)
+          const url = URL.createObjectURL(blob)
+          self.$emit('pdfGenerated', url)
+        }
+      })()
+
     }
   }
-}
+};
 </script>

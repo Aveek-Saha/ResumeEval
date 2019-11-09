@@ -1,16 +1,20 @@
 <template>
   <div class="home">
     <div class="row">
-      <div class="col">
-      </div>
-      <div class="col-lg-6 col-md-8 col-sm-10">
+      <div class="col-lg-6 col-md-12 col-sm-12">
         <div class="card">
           <div class="card-body">
-            <Form/>
+            <Form @pdfGenerated="handlePdfGenerated" />
           </div>
         </div>
       </div>
-      <div class="col">
+
+      <div class="col-lg-6 d-none d-lg-block">
+        <div class="card">
+          <div class="card-body">
+            <Preview v-bind:pdfUrl="pdfUrl" />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -18,12 +22,25 @@
 
 <script>
 // @ is an alias to /src
-import Form from '@/components/Form.vue'
+import Form from "@/components/Form.vue";
+import Preview from "@/components/Preview.vue";
 
 export default {
-  name: 'create',
+  name: "create",
   components: {
-    Form
+    Form,
+    Preview
+  },
+  data() {
+    return {
+      pdfUrl: null
+    };
+  },
+  methods: {
+    handlePdfGenerated(response) {
+      this.pdfUrl = response;
+      console.log("[INFO] Received Event ", this.pdfUrl);
+    }
   }
-}
+};
 </script>
