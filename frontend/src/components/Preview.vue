@@ -1,19 +1,22 @@
 <template>
   <div>
-    <!-- <div class="row">
-      <input v-model.number="page" type="number" style="width: 5em" />
+    <div class="row">
+      <!-- <input v-model.number="page" type="number" style="width: 5em" />
       /{{numPages}}
       <button @click="rotate += 90">&#x27F3;</button>
       <button @click="rotate -= 90">&#x27F2;</button>
-      <button @click="$refs.pdf.print()">print</button>
-    </div> -->
+      <button @click="$refs.pdf.print()">print</button> -->
+      
+
+        <a v-bind:href="pdfUrl" target="_blank"> <button class="btn btn-outline-success">Download</button></a>
+    </div>
 
     <div class="row">
-      <!-- <div 
+      <div 
         v-if="loadedRatio > 0 && loadedRatio < 1"
         style="background-color: green; color: white; text-align: center"
         :style="{ width: loadedRatio * 100 + '%' }"
-      >{{ Math.floor(loadedRatio * 100) }}%</div> -->
+      >{{ Math.floor(loadedRatio * 100) }}%</div>
       <div class="col-12">
         <pdf
           v-if="show"

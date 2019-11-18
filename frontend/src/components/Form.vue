@@ -418,7 +418,7 @@ export default {
     },
     sendData() {
       var self = this;
-      var selectedTemplate = 1;
+      var selectedTemplate = 2;
       var sections = [
         "profile",
         "education",
@@ -473,8 +473,11 @@ export default {
           console.log("[ERROR] Response Received")
         } else {
           console.log("[SUCCESS] Response Received", blob)
-          const url = URL.createObjectURL(blob)
-          self.$emit('pdfGenerated', url)
+          var file = new Blob([blob], {type: 'application/pdf'});
+          var fileURL = URL.createObjectURL(file);
+          window.open(fileURL);
+          // const url = URL.createObjectURL(blob)
+          self.$emit('pdfGenerated', fileURL)
         }
       })()
 
