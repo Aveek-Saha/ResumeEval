@@ -449,7 +449,7 @@ export default {
           skills.push({
             name: element.name,
             keywords: element.keywords.split(',')
-          })
+          }) 
         }
       });
       var projects = [];
