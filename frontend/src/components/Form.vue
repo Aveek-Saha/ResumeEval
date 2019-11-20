@@ -5,27 +5,27 @@
       <h4 class="card-title">Template Selector</h4>
       <div class="form-group">
         <div class="row">
-    <div class="col-xs-5">
+    <div class="col-lg-6">
       <button @click.prevent="selectedTemplate(1)">
-          <img src="../assets/1.png" width="70%" class="img-responsive">
+          <img src="../assets/1.png" width="100%" class="thumbnail img-responsive">
       </button>
             
     </div>
-    <div class="col-xs-5">
-       <button @click.prevent="selectedTemplate(2)">
-          <img src="../assets/2.png" width="70%" class="img-responsive">
+ <div class="col-lg-6">
+      <button @click.prevent="selectedTemplate(2)">
+          <img src="../assets/2.png" width="100%" class="thumbnail img-responsive">
       </button>
             
     </div>
-     <div class="col-xs-5">
+  <div class="col-lg-6">
       <button @click.prevent="selectedTemplate(3)">
-          <img src="../assets/3.png" width="70%" class="img-responsive">
+          <img src="../assets/3.png" width="100%" class="thumbnail img-responsive">
       </button>
             
     </div>
-     <div class="col-xs-5">
-        <button @click.prevent="selectedTemplate(4)">
-          <img src="../assets/4.png" width="70%" class="img-responsive">
+   <div class="col-lg-6">
+      <button @click.prevent="selectedTemplate(4)">
+          <img src="../assets/4.png" width="100%" class="thumbnail img-responsive">
       </button>
             
     </div>
