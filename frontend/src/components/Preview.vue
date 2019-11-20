@@ -6,9 +6,10 @@
       <button @click="rotate += 90">&#x27F3;</button>
       <button @click="rotate -= 90">&#x27F2;</button>
       <button @click="$refs.pdf.print()">print</button> -->
-      
-
+  <div class="col-sm-12"> 
         <a v-bind:href="pdfUrl" target="_blank"> <button class="btn btn-outline-success">Download</button></a>
+    
+    </div>
     </div>
 
     <div class="row">

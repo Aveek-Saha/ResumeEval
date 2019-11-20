@@ -1,5 +1,39 @@
 <template>
   <form method="post">
+
+    <div v-show="step === 0">
+      <h4 class="card-title">Template Selector</h4>
+      <div class="form-group">
+        <div class="row">
+    <div class="col-xs-5">
+      <button @click.prevent="selectedTemplate(1)">
+          <img src="../assets/1.png" width="70%" class="img-responsive">
+      </button>
+            
+    </div>
+    <div class="col-xs-5">
+       <button @click.prevent="selectedTemplate(2)">
+          <img src="../assets/2.png" width="70%" class="img-responsive">
+      </button>
+            
+    </div>
+     <div class="col-xs-5">
+      <button @click.prevent="selectedTemplate(3)">
+          <img src="../assets/3.png" width="70%" class="img-responsive">
+      </button>
+            
+    </div>
+     <div class="col-xs-5">
+        <button @click.prevent="selectedTemplate(4)">
+          <img src="../assets/4.png" width="70%" class="img-responsive">
+      </button>
+            
+    </div>
+  </div>
+
+      </div>
+    </div>
+
     <div v-show="step === 1">
       <h4 class="card-title">Personal Info</h4>
       <div class="form-group">
@@ -27,6 +61,7 @@
         <input type="text" class="form-control" v-model="link" placeholder="Website link" />
       </div>
       <div class="btn-group" role="group">
+        <button class="btn btn-primary" @click.prevent="prev()">Back</button>
         <button class="btn btn-primary" @click.prevent="next()">Next</button>
         <button class="btn btn-primary" @click.prevent="sendData()">Preview</button>
       </div>
@@ -296,7 +331,8 @@ export default {
   components: {},
   data() {
     return {
-      step: 1,
+      template : 1,
+      step: 0,
       url: "http://localhost:9000/api/generate/resume",
       name: null,
       email: null,
@@ -353,6 +389,10 @@ export default {
     },
     next() {
       this.step++;
+    },
+    selectedTemplate(idx) {
+      this.template = idx;
+      this.next();
     },
     addEducation() {
       this.education.push({
@@ -418,7 +458,7 @@ export default {
     },
     sendData() {
       var self = this;
-      var selectedTemplate = 4;
+      var selectedTemplate = this.template;
       var sections = [
         "profile",
         "education",
