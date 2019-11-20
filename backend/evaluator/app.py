@@ -238,7 +238,7 @@ def index():
         res = do_ml(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         suggestions = ""
         if(res[1].lower() in suggested_skills):
-        	suggestions = ", ".join(suggested_skills[predclass.lower()])
+        	suggestions = ", ".join(suggested_skills[res[1].lower()])
         
         return jsonify({'summary': res[0], 'category': res[1], 'suggest': suggestions})
     return """

@@ -1,5 +1,6 @@
 <template>
   <form method="post">
+    
     <div v-show="step === 1">
       <h4 class="card-title">Personal Info</h4>
       <div class="form-group">
@@ -274,9 +275,13 @@
       </div>
       <div class="btn-group" role="group">
         <button class="btn btn-primary" @click.prevent="prev()">Back</button>
-        <button class="btn btn-primary" @click.prevent="sendData()">Submit</button>
+        <button class="btn btn-primary" @click.prevent="sendData(); next()">Submit</button>
         <button class="btn btn-primary" @click.prevent="sendData()">Preview</button>
       </div>
+    </div>
+    <div v-show="step === 7">
+      <h5>Your Rating !!</h5>
+     {{rating}}
     </div>
   </form>
 </template>
@@ -300,6 +305,7 @@ export default {
       step: 1,
       rateUrl: "http://localhost:5001/rate",
       url: "http://localhost:9000/api/generate/resume",
+      rating: "",
       name: null,
       email: null,
       number: null,
@@ -476,10 +482,11 @@ export default {
         awards
       };
       console.log(data);
-
+      var that = this
       axios.post(this.rateUrl, data)
       .then(function (response) {
         console.log(response);
+        that.rating = response.data.rating
       })
       .catch(function (error) {
         console.log(error);

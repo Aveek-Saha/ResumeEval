@@ -50,6 +50,15 @@
         </div>
       </div>
     </div>
+    <br>
+    <div>
+      <h5>Resume category</h5>
+      {{category}} <br>
+      <h5>Resume Suggestions</h5>
+      {{suggestions}} <br>
+      <h5>Summary</h5>
+      {{summary}}
+    </div>
   </div>
 </template>
 
@@ -97,7 +106,9 @@ export default {
   },
   data() {
     return {
-      
+      summary: "",
+      category: "",
+      suggestions: "",
       files: [],
     }
   },
@@ -119,6 +130,11 @@ export default {
       if (newFile && oldFile && !newFile.active && oldFile.active) {
         // Get response data
         console.log('response', newFile.response)
+        var res = newFile.response
+
+        this.suggestions = res.suggest
+        this.summary = res.summary
+        this.category = res.category
 
         if (newFile.xhr) {
           //  Get the response status code
