@@ -28,6 +28,7 @@
           :multiple="true"
           :drop="true"
           :drop-directory="true"
+          @input-file="inputFile"
           v-model="files"
           ref="upload">
           <i class="fa fa-plus"></i>
@@ -96,6 +97,7 @@ export default {
   },
   data() {
     return {
+      
       files: [],
     }
   },
@@ -114,18 +116,27 @@ export default {
       }
     },
     inputFile(newFile, oldFile) {
-      if (newFile && !oldFile) {
-        // add
-        console.log('add', newFile)
+      if (newFile && oldFile && !newFile.active && oldFile.active) {
+        // Get response data
+        console.log('response', newFile.response)
+
+        if (newFile.xhr) {
+          //  Get the response status code
+          console.log('status', newFile.xhr.status)
+        }
       }
-      if (newFile && oldFile) {
-        // update
-        console.log('update', newFile)
-      }
-      if (!newFile && oldFile) {
-        // remove
-        console.log('remove', oldFile)
-      }
+      // if (newFile && !oldFile) {
+      //   // add
+      //   console.log('add', newFile)
+      // }
+      // if (newFile && oldFile) {
+      //   // update
+      //   console.log('update', newFile)
+      // }
+      // if (!newFile && oldFile) {
+      //   // remove
+      //   console.log('remove', oldFile)
+      // }
     }
   }
 }
