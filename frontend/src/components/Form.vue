@@ -420,7 +420,7 @@ export default {
     },
     sendData() {
       var self = this;
-      var selectedTemplate = 2;
+      var selectedTemplate = 4;
       var sections = [
         "profile",
         "education",
