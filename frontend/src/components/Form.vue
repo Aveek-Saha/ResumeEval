@@ -83,11 +83,11 @@
         </div>
         <div class="form-group">
           <label>Start date</label>
-          <input type="text" class="form-control" v-model="school.startDate" placeholder="Date started" />
+          <input type="date" class="form-control" v-model="school.startDate" placeholder="Date started" />
         </div>
         <div class="form-group">
           <label>End date</label>
-          <input type="text" class="form-control" v-model="school.endDate" placeholder="Date ended" />
+          <input type="date" class="form-control" v-model="school.endDate" placeholder="Date ended" />
         </div>
         <div class="btn-group" role="group" style="text-align: right">
           <button class="btn btn-outline-success" @click.prevent="addEducation()">Add</button>
@@ -135,11 +135,11 @@
         </div>
         <div class="form-group">
           <label>Start date</label>
-          <input type="text" class="form-control" v-model="job.startDate" placeholder="Date started" />
+          <input type="date" class="form-control" v-model="job.startDate" placeholder="Date started" />
         </div>
         <div class="form-group">
           <label>End date</label>
-          <input type="text" class="form-control" v-model="job.endDate" placeholder="Date ended" />
+          <input type="date" class="form-control" v-model="job.endDate" placeholder="Date ended" />
         </div>
         <div class="btn-group" role="group" style="text-align: right">
           <button class="btn btn-outline-success" @click.prevent="addWork()">Add</button>
@@ -290,6 +290,7 @@
 
 <script>
 import { async } from "q";
+import axios from "axios"
 
 export default {
   name: "Form",
@@ -297,6 +298,7 @@ export default {
   data() {
     return {
       step: 1,
+      rateUrl: "http://localhost:5001/rate",
       url: "http://localhost:9000/api/generate/resume",
       name: null,
       email: null,
@@ -441,8 +443,26 @@ export default {
       };
       var education = this.education;
       var work = this.work;
-      var skills = this.skills;
-      var projects = this.projects;
+      var skills = [];
+      this.skills.forEach(element => {
+        if (element.name!= null) {
+          skills.push({
+            name: element.name,
+            keywords: element.keywords.split(',')
+          })
+        }
+      });
+      var projects = [];
+      this.projects.forEach(proj => {
+        if (proj.name!= null) {
+          projects.push({
+            name: proj.name,
+            description: proj.description,
+            url: proj,url,
+            keywords: proj.keywords.split(',')
+          })
+        }
+      })
       var awards = this.awards;
 
       var data = {
@@ -456,6 +476,14 @@ export default {
         awards
       };
       console.log(data);
+
+      axios.post(this.rateUrl, data)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
       (async () => {
         const { fetch } = window;
