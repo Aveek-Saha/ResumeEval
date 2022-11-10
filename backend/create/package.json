@@ -52,7 +52,7 @@
     "babel-preset-flow": "^6.23.0",
     "blyss": "^10.1.0",
     "flow-bin": "^0.61.0",
-    "flow-coverage-report": "^0.4.1",
+    "flow-coverage-report": "^0.8.0",
     "flow-typed": "^2.6.2",
     "glow": "^1.1.0",
     "jest": "^25.0.0",
